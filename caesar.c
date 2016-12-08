@@ -5,7 +5,7 @@
 
 int main (int argc, string argv[])
 {
-    // checking number on arguments passed by the user. 
+    // checking number of arguments passed by the user. 
     if (argc != 2)
     {
         printf ("Please comply by giving one int key!\n");
