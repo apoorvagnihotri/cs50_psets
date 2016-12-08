@@ -39,3 +39,5 @@ int rem(int due, int denomination)
 {
     return due % denomination;
 }
+
+//Nothing to commit just seting up user name and pass and email id.. as global
