@@ -24,17 +24,17 @@
 
 int main(int argc, string argv[])
 {
-    // TODO: comment me
+    // Checking if number of arguments provided by the user is neither 2 nor 3, but something else.
     if (argc != 2 && argc != 3)
     {
         printf("Usage: generate n [s]\n");
         return 1;
     }
 
-    // TODO: comment me
+    // conversion of the 2nd argument to an int from a string.
     int n = atoi(argv[1]);
 
-    // TODO: comment me
+    // if number of arguments is exactly 3, this block of code runs and produces a seed to be placed in drand48()
     if (argc == 3)
     {
         srand48((long int) atoi(argv[2]));
