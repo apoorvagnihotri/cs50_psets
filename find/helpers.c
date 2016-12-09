@@ -16,14 +16,9 @@
  */
 bool search(int value, int values[], int n)
 {
-    // TODO: implement a searching algorithm
-    if (value < 0)
-        return false;
-    for (int i = 0; i < n; i++)
-    {
-        if (values[i] == value)
-            return true;
-    }
+    //implementing binary search
+    if n
+    
     return false;
 }
 
