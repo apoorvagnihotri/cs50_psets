@@ -36,20 +36,21 @@ void sort(int values[], int n)
     // Using bubble sort to implemnt sorting
     for (int i = 0; n - 1; i++)
     {
-        bool key = false;
+        // setting a flag to optimize the sorting a little bit
+        bool flag = false;
         for (int k = 0; k < (n - (1 + i)); k++)
         {
+            // looking for unsorted pair
             if (values[k] > values[k + 1])
             {
                 // Swapping...
-                
                 int temp = values[k];
                 values[k] = values[k + 1];
                 values[k + 1] = temp;
-                key = true;
+                flag = true;
             }
         }
-        if (!key)
+        if (!flag)
             break;
     }       
     return;
