@@ -11,9 +11,6 @@
 
 #include "helpers.h"
 
-//function for swapping
-void swap(int x, int y);
-
 /**
  * Returns true if value is in array of n values, else false.
  */
@@ -45,7 +42,10 @@ void sort(int values[], int n)
             if (values[k] > values[k + 1])
             {
                 // Swapping...
-                swap (values[k], values[k + 1]);
+                
+                int temp = values[k];
+                values[k] = values[k + 1];
+                values[k + 1] = temp;
                 key = true;
             }
         }
@@ -53,13 +53,4 @@ void sort(int values[], int n)
             break;
     }       
     return;
-}
-
-void swap(int x, int y)
-{
-    {   
-        int temp = x;
-        x = y;
-        y = temp;
-    }
 }
