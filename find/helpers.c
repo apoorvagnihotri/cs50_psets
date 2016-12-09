@@ -11,6 +11,9 @@
 
 #include "helpers.h"
 
+//function for swapping
+void swap(int x, int y);
+
 /**
  * Returns true if value is in array of n values, else false.
  */
@@ -34,25 +37,29 @@ void sort(int values[], int n)
 {
     // TODO: implement an O(n^2) sorting algorithm
     // Using bubble sort to implemnt sorting
-    while (true)
+    for (int i = 0; n - 1; i++)
     {
         bool key = false;
-        if (!key)
-            break;
-        for (int i = 0; n - 1; i++)
-            for (int k = 0; k < (n - (1 + i)); k++)
+        for (int k = 0; k < (n - (1 + i)); k++)
+        {
+            if (values[k] > values[k + 1])
             {
                 // Swapping...
-                if (values[k] > values[k + 1])
-                {   
-                    int temp = values[k];
-                    values[k] = values[k + 1];
-                    values[k + 1] = temp;
-                    key = true;
-                }
+                swap (values[k], values[k + 1]);
+                key = true;
             }
-            if (!key)
-                break;
+        }
+        if (!key)
+            break;
     }       
     return;
+}
+
+void swap(int x, int y)
+{
+    {   
+        int temp = x;
+        x = y;
+        y = temp;
+    }
 }
