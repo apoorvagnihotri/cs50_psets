@@ -17,7 +17,9 @@
 bool search(int value, int values[], int n)
 {
     // TODO: implement a searching algorithm
-    return false;
+    if (value < 0)
+        return false;
+    int length
 }
 
 /**
