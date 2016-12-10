@@ -17,8 +17,21 @@
 bool search(int value, int values[], int n)
 {
     //implementing binary search
-    if n
-    
+    int start = 0;
+    int end = n;
+    int mid = n / 2;
+    while ((end - start) > 0)
+    {
+        mid = ((start + end) / 2);
+        if (values[mid] == value)
+            return true;
+        
+        else if (values[mid] < value)
+            start = mid + 1;
+        
+        else
+            end = mid;
+    }
     return false;
 }
 
