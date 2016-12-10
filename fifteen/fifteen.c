@@ -159,7 +159,29 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+    bool key = false;
+    int max = (d * d) - 1;
+    for (int i = 0; i < d; i++)
+    {
+        for (int k = 0; k < d; k++)
+        {
+            board[i][k] = max;
+            max--;
+            if (max == 2)
+            {
+                key = true;
+                break;
+            }
+        }
+        if (key)
+            break;
+    }
+    
+    if ((d % 2) == 0)
+    {
+        board[d][d - 2] = 1;
+        board[d][d - 1] = 2;
+    }
 }
 
 /**
