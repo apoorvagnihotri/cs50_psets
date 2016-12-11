@@ -32,6 +32,11 @@ int board[DIM_MAX][DIM_MAX];
 // dimensions
 int d;
 
+// blank
+bool initialized = false;
+int row0 = 0;
+int column0 = 0;
+
 // prototypes
 void clear(void);
 void greet(void);
@@ -186,7 +191,7 @@ void draw(void)
         for (int j = 0; j < d; j++)
         {
             if (board[i][j] == 0)
-                printf ("_");
+                printf ("_\t");
             else
                 printf("%i\t", board[i][j]);
         }
@@ -200,7 +205,37 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // TODO
+    
+    if (!initialized)
+    {
+        initialized = true;
+        row0 = d - 1;
+        column0 = d - 1;
+    }
+    
+    // searching for the tile that user inputed
+    int row = 0;
+    int column = 0;
+    bool found = false;
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] == tile)
+                row = i;
+                column = j;
+                found = true;
+                break;
+        }
+        if (found)
+            break;
+    }
+    if (((row == row0) && ((column == column0 + 1) || (column == column0 - 1))) || ((column == column0) && ((row == row0 + 1) || (row == row0 - 1))))
+        board[row0][column0] = tile;
+        board[row][column] = 0;
+        row0 = row;
+        column0 = column;
+        return true;
     return false;
 }
 
