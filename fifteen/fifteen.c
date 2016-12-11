@@ -110,7 +110,7 @@ int main(int argc, string argv[])
         // prompt for move
         printf("Tile to move: ");
         int tile = GetInt();
-        if ((tile > ((d * d) - 1)) || (tile < 1)))
+        if ((tile > ((d * d) - 1)) || (tile < 1))
             return -1;
 
         // log move (for testing)
@@ -217,8 +217,7 @@ bool move(int tile)
     {
         for (int j = 0; j < d; j++)
         {
-            int value = board[i][j];
-            if (value == tile)
+            if (board[i][j] == tile)
             {
                 row = i;
                 column = j;
@@ -244,6 +243,18 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
-    return false;
+    int max = (d * d) - 1;
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] != max)
+            {
+                return false;
+                
+            }
+            max--;
+        }
+    }
+    return true;
 }
