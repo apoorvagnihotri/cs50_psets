@@ -34,8 +34,8 @@ int d;
 
 // blank
 bool initialized = false;
-int row0 = 0;
-int column0 = 0;
+int row0;
+int column0;
 
 // prototypes
 void clear(void);
@@ -110,12 +110,8 @@ int main(int argc, string argv[])
         // prompt for move
         printf("Tile to move: ");
         int tile = GetInt();
-        
-        // quit if user inputs 0 (for testing)
-        if (tile == 0)
-        {
-            break;
-        }
+        if ((tile > ((d * d) - 1)) || (tile < 1)))
+            return -1;
 
         // log move (for testing)
         fprintf(file, "%i\n", tile);
@@ -214,18 +210,21 @@ bool move(int tile)
     }
     
     // searching for the tile that user inputed
-    int row = 0;
-    int column = 0;
+    int row;
+    int column;
     bool found = false;
     for (int i = 0; i < d; i++)
     {
         for (int j = 0; j < d; j++)
         {
-            if (board[i][j] == tile)
+            int value = board[i][j];
+            if (value == tile)
+            {
                 row = i;
                 column = j;
                 found = true;
                 break;
+            }
         }
         if (found)
             break;
