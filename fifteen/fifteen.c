@@ -229,11 +229,13 @@ bool move(int tile)
             break;
     }
     if (((row == row0) && ((column == column0 + 1) || (column == column0 - 1))) || ((column == column0) && ((row == row0 + 1) || (row == row0 - 1))))
+    {
         board[row0][column0] = tile;
         board[row][column] = 0;
         row0 = row;
         column0 = column;
         return true;
+    }
     return false;
 }
 
@@ -243,17 +245,16 @@ bool move(int tile)
  */
 bool won(void)
 {
-    int max = (d * d) - 1;
+    int max = 1;
     for (int i = 0; i < d; i++)
     {
         for (int j = 0; j < d; j++)
         {
             if (board[i][j] != max)
-            {
                 return false;
-                
-            }
-            max--;
+            max++;
+            if (max == (d * d))
+                return true;
         }
     }
     return true;
