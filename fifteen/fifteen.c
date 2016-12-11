@@ -187,8 +187,10 @@ void draw(void)
         {
             if (board[i][j] == 0)
                 printf ("_");
-            
+            else
+                printf("%i\t", board[i][j]);
         }
+        printf("\n");
     }
 }
 
