@@ -1,8 +1,8 @@
-0.  TODO
-1.  TODO
-2.  TODO
-3.  TODO
-4.  TODO
+0.  GIF = 256, JPEG = 16 million colors, bmp 16M, png 256T
+1.  GIF
+2.  lossy-  info is lost(details), lossless- info is compressed and can be recovered
+3.  gif and jpeg
+4.  two things occur, file name is changed as to imply that the file has been deleted and the clusters where the actual file was stored are marked free, not actually removing the data, but open to overwriting the data there.
 5.  TODO
 6.  TODO
 7.  TODO

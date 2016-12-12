@@ -18,7 +18,7 @@
  * Adapted from http://msdn.microsoft.com/en-us/library/cc230309.aspx.
  * See http://en.wikipedia.org/wiki/Stdint.h for more on stdint.h.
  */
-typedef uint8_t  BYTE;
+typedef uint8_t  BYTE;  //typedef existing_name alias_name
 typedef uint32_t DWORD;
 typedef int32_t  LONG;
 typedef uint16_t WORD;
