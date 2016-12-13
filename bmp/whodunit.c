@@ -82,7 +82,17 @@ int main(int argc, char* argv[])
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
             // write RGB triple to outfile
-            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);  
+            if ((triple.rgbtBlue == 0x00) && ((triple.rgbtGreen == 0x00) && (triple.rgbtRed ==  0xff)))
+            {
+                triple.rgbtBlue = 0xff;
+                triple.rgbtGreen = 0xff;
+                triple.rgbtRed =  0xff;
+                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            }
+            else
+            {
+                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            }
             
             /**fwrite(*pointer (address) to matter to be written, sizeof total matter to be written, 
              * sizeof matter that need to be written on each ittration, output file pointer)

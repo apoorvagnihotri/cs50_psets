@@ -79,4 +79,8 @@ typedef struct
     BYTE  rgbtGreen;
     BYTE  rgbtRed;
 } __attribute__((__packed__))
+/**Our use, incidentally, of the attribute called packed ensures that clang does not 
+ * try to "word-align" members (by which the address of each member’s first byte is a multiple of 4),
+ * lest we end up with "gaps" in our `struct`s that don’t actually exist on disk.
+ */
 RGBTRIPLE;

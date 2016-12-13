@@ -1,14 +1,14 @@
-0.  GIF = 256, JPEG = 16 million colors, bmp 16M, png 256T
-1.  GIF
-2.  lossy-  info is lost(details), lossless- info is compressed and can be recovered
-3.  gif and jpeg
-4.  two things occur, file name is changed as to imply that the file has been deleted and the clusters where the actual file was stored are marked free, not actually removing the data, but open to overwriting the data there.
-5.  TODO
-6.  TODO
-7.  TODO
-8.  TODO
-9.  TODO
-10. TODO
+0.  GIF = 256, JPEG = 16 million colors, BMP = 16 million colors, PNG = 256 Trillion colors
+1.  GIF supports animation.
+2.  lossy -  info(pixels) are lost and cannot be recovered,  lossless- info(pixels) are compressed and can be recovered
+3.  GIF and JPEG are lossy-compressed
+4.  Two things occur, file name is changed as to imply that the file has been deleted and the clusters where the actual file was stored are marked free, not actually removing the data, but open to overwriting any data there.
+5.  For someone like us, simply filling the entire hard disk with ASCII NUL bytes will provide sufficient possibility of non recoverable data.
+6.  stdint.h is a header file that is used to define ints with soecific properties, because of the different types of systems in world, ints can wary in properties like number of bits to denote a single int, here stdint comes into play to specify exact properties of ints on a system.
+7.  using uint8_t and such specific int types in programs helps us make the program independent of the system on which it's running, because differnet systems have different properties for ints, based on system's specificaion.
+8.  BYTE = 1 byte; DWORD = 4 bytes; LONG = 4 bytes; WORD = 2 bytes
+9.  Hex = 0x4d42, first 2 bytes of a bmp file have this 'magic number' to identify that file to be a Bitmap File.
+10. bfsize has the info about number of bytes the file is. bisize has the info of the number of bytes BITMAPINFOHEADER has.
 11. TODO
 12. TODO
 13. TODO
