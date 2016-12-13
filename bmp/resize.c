@@ -1,10 +1,10 @@
 /**
- * whodunit.c
+ * resize.c
  *
  * Computer Science 50
  * Problem Set 4
  *
- * remover red from a bmp file.
+ * Resizes a bmp given by a factor n.
  */
        
 #include <stdio.h>
@@ -15,15 +15,16 @@
 int main(int argc, char* argv[])
 {
     // ensure proper usage
-    if (argc != 3)
+    if (argc != 4)
     {
-        printf("Usage: ./copy infile outfile\n");
+        printf("Usage: ./resize n infile outfile\n");
         return 1;
     }
 
     // remember filenames
-    char* infile = argv[1];
-    char* outfile = argv[2];
+    int n = atoi(argv[1]);
+    char* infile = argv[2];
+    char* outfile = argv[3];
 
     // open input file 
     FILE* inptr = fopen(infile, "r");
@@ -49,6 +50,12 @@ int main(int argc, char* argv[])
     // read infile's BITMAPINFOHEADER
     BITMAPINFOHEADER bi;
     fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
+    
+    
+    // edit karna hai
+    bf.bfsize
+
+
 
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
     if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 || 
@@ -82,17 +89,7 @@ int main(int argc, char* argv[])
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
             // write RGB triple to outfile
-            if ((triple.rgbtBlue == 0x00) && ((triple.rgbtGreen == 0x00) && (triple.rgbtRed ==  0xff)))
-            {
-                triple.rgbtBlue = 0xff;
-                triple.rgbtGreen = 0xff;
-                triple.rgbtRed =  0xff;
-                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-            }
-            else
-            {
-                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-            }
+            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);  
             
             /**fwrite(*pointer (address) to matter to be written, sizeof total matter to be written, 
              * sizeof matter that need to be written on each ittration, output file pointer)
