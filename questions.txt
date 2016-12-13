@@ -9,7 +9,7 @@
 8.  BYTE = 1 byte; DWORD = 4 bytes; LONG = 4 bytes; WORD = 2 bytes
 9.  Hex = 0x4d42, first 2 bytes of a bmp file have this 'magic number' to identify that file to be a Bitmap File.
 10. bfsize has the info about number of bytes the file is. bisize has the info of the number of bytes BITMAPINFOHEADER has.
-11. TODO
+11. when we have negative height it signifies that the bmp file is such that the top left corner of the image will come first in the files binary code.
 12. TODO
 13. TODO
 14. TODO
