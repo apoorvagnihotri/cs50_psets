@@ -62,8 +62,8 @@ int main(int argc, char* argv[])
     bir.biHeight = bi.biHeight * n;
     bir.biWidth = bi.biWidth * n;
     int newpadding = (4 - (bir.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-    bir.biSizeImage = abs(bir.biHeight * newpadding) + abs(bir.biHeight * bir.biWidth);
-    //bfr.bfSize = bir.biSizeImage + 54;
+    bir.biSizeImage = abs(bir.biHeight * newpadding) + abs(bir.biHeight * bir.biWidth * 3);
+    bfr.bfSize = bir.biSizeImage + 54;
 
 
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
@@ -100,27 +100,20 @@ int main(int argc, char* argv[])
                 {
                     // write RGB triple to outfile
                     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);  
-                    
-                    /**fwrite(*pointer (address) to matter to be written, sizeof total matter to be written, 
-                     * sizeof matter that need to be written on each ittration, output file pointer)
-                     */
                 }
             }
     
             // skip over padding, if any
             fseek(inptr, padding, SEEK_CUR);
-            
-            /* This is used to move the cursor by a number of bites (padding here) 
-             * from the a certian position (SEEK_CUR = current postion of the cursor, SEEK_END and SEEK_SET)
-             * fseek (input file pointer, no of bytes, postion from where).
-             */
-    
+
             // then add it back (to demonstrate how)
             for (int k = 0; k < newpadding; k++)
             {
                 fputc(0x00, outptr);
             }
+            fseek(inptr, -(bi.biWidth * 3 + padding), SEEK_CUR);
         }
+        fseek(inptr, bi.biWidth * 3 + padding, SEEK_CUR);
     }
 
     // close infile
