@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <cs50.h>
 
 typedef uint8_t BYTE;
 
 int main (void)
 {
     BYTE* inptr = malloc(sizeof(BYTE) * 512);
-    char* filename[4];
+    char* filename = "000.jpg";
     int counter = 0;
     bool found = false;
     FILE* infile = fopen("card.raw", "r");
@@ -16,7 +17,7 @@ int main (void)
         return(-1);
     }
     
-    FILE* outfile = fopen(000.jpg, "w");
+    FILE* outfile = fopen(filename, "w");
     if(outfile == NULL) 
     {
         printf("Error in creating file");
@@ -27,11 +28,11 @@ int main (void)
     while (true)
     {
         fread(inptr, sizeof(inptr), 1, infile);
-        if (((inptr[0] == ) && (inptr[1] == )) && (inptr[2] == ))
+        if (((inptr[0] == 0xff) && (inptr[1] == 0xd8)) && (inptr[2] == 0xff))
         {            
             if (found)
             {
-                fclose(outfile)
+                fclose(outfile);
                 counter++;
                 sprintf(filename, "%3d.jpg", counter);
                 fopen(filename, "w");   
@@ -42,7 +43,7 @@ int main (void)
         {
             fwrite(inptr, sizeof(inptr), 1, outfile);
         }
-        if (feof)
+        if (feof(infile))
         {
             fclose(outfile);
             fclose(infile);
