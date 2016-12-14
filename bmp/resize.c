@@ -62,8 +62,8 @@ int main(int argc, char* argv[])
     bir.biHeight = bi.biHeight * n;
     bir.biWidth = bi.biWidth * n;
     int newpadding = (4 - (bir.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-    bir.biSizeImage = abs(bir.biHeight * newpadding * 3) + abs(bir.biHeight * bir.biWidth);
-    bfr.bfSize = bir.biSizeImage + 54;
+    bir.biSizeImage = abs(bir.biHeight * newpadding) + abs(bir.biHeight * bir.biWidth);
+    //bfr.bfSize = bir.biSizeImage + 54;
 
 
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
