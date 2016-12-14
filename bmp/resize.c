@@ -1,12 +1,3 @@
-/**
- * resize.c
- *
- * Computer Science 50
- * Problem Set 4
- *
- * Resizes a bmp given by a factor n.
- */
-       
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,10 +12,16 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    // remember filenames
+    // remember filenames and factor
     int n = atoi(argv[1]);
     char* infile = argv[2];
     char* outfile = argv[3];
+    
+    if((n < 1) || (n > 100))
+    {
+        printf("n can only be a positive integer less than or equal to 100\n");
+        return -1;
+    }
 
     // open input file 
     FILE* inptr = fopen(infile, "r");
@@ -60,12 +57,12 @@ int main(int argc, char* argv[])
     
     // determine padding for scanlines
     int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-    int newpadding = (4 - (bir.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     
     //setting differnet values which change upon resizing
     bir.biHeight = bi.biHeight * n;
     bir.biWidth = bi.biWidth * n;
-    bir.biSizeImage = bir.biHeight * newpadding * 3 + bir.biHeight * bir.biWidth;
+    int newpadding = (4 - (bir.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+    bir.biSizeImage = abs(bir.biHeight * newpadding * 3) + abs(bir.biHeight * bir.biWidth);
     bfr.bfSize = bir.biSizeImage + 54;
 
 
