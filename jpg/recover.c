@@ -29,7 +29,7 @@ int main (void)
         fread(inptr, sizeof(inptr), 1, infile);
         if (((inptr[0] == ) && (inptr[1] == )) && (inptr[2] == ))
         {            
-            if (write)
+            if (found)
             {
                 fclose(outfile)
                 counter++;
