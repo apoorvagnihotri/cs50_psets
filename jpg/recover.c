@@ -6,7 +6,6 @@ typedef uint8_t BYTE;
 
 int main (void)
 {
-    BYTE* inptr = malloc(sizeof(BYTE) * 512);
     char* filename = "000.jpg";
     int counter = 0;
     bool found = false;
@@ -24,25 +23,31 @@ int main (void)
         return(-1);
     }
     
+    BYTE* buffer = malloc(sizeof(BYTE) * 512);
+    
     
     while (true)
     {
-        fread(inptr, sizeof(inptr), 1, infile);
-        if (((inptr[0] == 0xff) && (inptr[1] == 0xd8)) && (inptr[2] == 0xff))
+        fread(buffer, sizeof(buffer), 1, infile);
+
+        if ((((buffer[0] == 0xff) && (buffer[1] == 0xd8)) && (buffer[2] == 0xff)) && (buffer[3] == 0xe0 || buffer[3] == 0xe1))
         {            
+            
             if (found)
             {
                 fclose(outfile);
                 counter++;
                 sprintf(filename, "%3d.jpg", counter);
-                fopen(filename, "w");   
+                fopen(filename, "w");
             }
             found = true;   
         }
+        
         if (found)
         {
-            fwrite(inptr, sizeof(inptr), 1, outfile);
+            fwrite(buffer, sizeof(buffer), 1, outfile);
         }
+        
         if (feof(infile))
         {
             fclose(outfile);
@@ -50,4 +55,7 @@ int main (void)
             break;
         }
     }
+    
+    free(buffer);
+    return 0;
 }
