@@ -6,7 +6,7 @@ typedef uint8_t BYTE;
 
 int main (void)
 {
-    char jpgout = "000.jpg";
+    char jpgout[8] = "000.jpg";
     int counter = 0;
     
     //found is used to see if first jpg reached or not
@@ -19,7 +19,7 @@ int main (void)
         return(-1);
     }
     
-    FILE* outptr = fopen(jpgout, "w");
+    FILE* outptr = fopen("000.jpg", "w");
     if(outptr == NULL) 
     {
         printf("Error in creating file");
@@ -37,10 +37,10 @@ int main (void)
             {
                 fclose(outptr);
                 counter++;
-                sprintf(jpgout, "%3d.jpg", counter);
+                sprintf(jpgout, "%.3d.jpg" , counter);
                 outptr = fopen(jpgout, "w");
             }
-            found = true;   
+            found = true;
         }
         
         if (found)
