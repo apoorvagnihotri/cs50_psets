@@ -29,6 +29,8 @@ int main (void)
     BYTE* buffer = malloc(sizeof(BYTE) * 512);
     while (true)
     {
+        
+        //maybe fread() tried to input NULL in the jpg file at EOF.
         if ((fread(buffer, sizeof(buffer), 1, inptr)) == 1)
         {
             if ((((buffer[0] == 0xff) && (buffer[1] == 0xd8)) && (buffer[2] == 0xff)) && (buffer[3] == 0xe0 || buffer[3] == 0xe1))
