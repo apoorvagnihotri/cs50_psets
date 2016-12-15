@@ -29,26 +29,26 @@ int main (void)
     BYTE* buffer = malloc(sizeof(BYTE) * 512);
     while (true)
     {
-        fread(buffer, sizeof(buffer), 1, inptr);
-
-        if ((((buffer[0] == 0xff) && (buffer[1] == 0xd8)) && (buffer[2] == 0xff)) && (buffer[3] == 0xe0 || buffer[3] == 0xe1))
+        if ((fread(buffer, sizeof(buffer), 1, inptr)) == 1)
         {
+            if ((((buffer[0] == 0xff) && (buffer[1] == 0xd8)) && (buffer[2] == 0xff)) && (buffer[3] == 0xe0 || buffer[3] == 0xe1))
+            {
+                if (found)
+                {
+                    fclose(outptr);
+                    counter++;
+                    sprintf(jpgout, "%.3d.jpg" , counter);
+                    outptr = fopen(jpgout, "w");
+                }
+                found = true;
+            }
+            
             if (found)
             {
-                fclose(outptr);
-                counter++;
-                sprintf(jpgout, "%.3d.jpg" , counter);
-                outptr = fopen(jpgout, "w");
+                fwrite(buffer, sizeof(buffer), 1, outptr);
             }
-            found = true;
         }
-        
-        if (found)
-        {
-            fwrite(buffer, sizeof(buffer), 1, outptr);
-        }
-        
-        if (feof(inptr))
+        else
         {
             fclose(outptr);
             fclose(inptr);
