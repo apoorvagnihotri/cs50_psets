@@ -22,6 +22,15 @@
 // prototype
 double calculate(const struct rusage* b, const struct rusage* a);
 
+
+//Trie structure
+typedef struct node
+{
+    bool isWord;
+    struct node* children [27];
+} node;
+
+//main function speller
 int main(int argc, char* argv[])
 {
     // check for correct number of args
@@ -38,6 +47,8 @@ int main(int argc, char* argv[])
     double time_load = 0.0, time_check = 0.0, time_size = 0.0, time_unload = 0.0;
 
     // determine dictionary to use
+    // a = ((bool) ? x : y);
+    // if bool is true then x is assigned to a else y.
     char* dictionary = (argc == 3) ? argv[1] : DICTIONARY;
 
     // load dictionary
@@ -72,7 +83,7 @@ int main(int argc, char* argv[])
     int index = 0, misspellings = 0, words = 0;
     char word[LENGTH+1];
 
-    // spell-check each word in text
+    // spell-check each word in text ###Very nice syntax###
     for (int c = fgetc(fp); c != EOF; c = fgetc(fp))
     {
         // allow only alphabetical characters and apostrophes

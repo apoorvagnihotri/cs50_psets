@@ -7,6 +7,7 @@
  * Implements a dictionary's functionality.
  */
 
+#include <stdio.h>
 #include <stdbool.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -24,6 +25,10 @@ bool check(const char* word)
     {
         *(spell + i) = tolower(*(spell + i));
     }
+    
+    
+    
+    free(spell);
     return false;
 }
 
@@ -32,7 +37,32 @@ bool check(const char* word)
  */
 bool load(const char* dictionary)
 {
-    // TODO
+    
+    // open dictionary file for reading.
+    FILE* dfp = fopen(dictionary, "r");
+    
+    // check if it opened
+    if (dfp == NULL)
+    {
+        return false;
+    }
+    
+    while (true)
+    {
+        // get each char and save it
+        char c = fgetc(dfp);
+        
+        // check if end of file reached
+        if (feof(dfp))
+        {
+            return true;
+        }
+        
+        // 
+        c = tolower(c);
+        loader(c, &node);
+        
+    }
     return false;
 }
 
@@ -52,4 +82,9 @@ bool unload(void)
 {
     // TODO
     return false;
+}
+
+void loader(char c, *node)
+{
+    
 }
