@@ -15,6 +15,9 @@
 
 #include "dictionary.h"
 
+// built functio to load words in dictionary
+void loader(char* c, *node);
+
 /**
  * Returns true if word is in dictionary else false.
  */
@@ -47,23 +50,18 @@ bool load(const char* dictionary)
         return false;
     }
     
-    while (true)
+    while(true)
     {
-        // get each char and save it
-        char c = fgetc(dfp);
+        // get each word and save it
+        char dWord [45];
         
-        // check if end of file reached
-        if (feof(dfp))
+        // untill EOF reached perform loading
+        while (fscanf(dfp, dWord) != EOF)
         {
+            loader(dWord, &node);
             return true;
         }
-        
-        // 
-        c = tolower(c);
-        loader(c, &node);
-        
     }
-    return false;
 }
 
 /**
@@ -82,9 +80,4 @@ bool unload(void)
 {
     // TODO
     return false;
-}
-
-void loader(char c, *node)
-{
-    
 }
