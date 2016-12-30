@@ -3,7 +3,7 @@
  *
  * Computer Science 50
  * Problem Set 5
- *
+ *  
  * Implements a dictionary's functionality.
  */
 
@@ -31,15 +31,17 @@ int dSize;
  */
 bool check(const char* word)
 {
-    char* spell = malloc(sizeof(word));
-    for (int i = 0, n = strlen(spell); i < n; i++)
+    char* currWord = malloc(sizeof(word));
+    strncpy(currWord, word);
+    for (int i = 0, n = strlen(currWord); i < n; i++)
     {
-        *(spell + i) = tolower(*(spell + i));
+        *(currWord + i) = tolower(*(currWord + i));
+        
     }
     
     
     
-    free(spell);
+    free(currWord);
     return false;
 }
 
