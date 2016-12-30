@@ -22,6 +22,10 @@ typedef struct node
     struct node* children [27];
 } node;
 
+// declaring varibales and structs
+node* root;
+int dSize;
+
 /**
  * Returns true if word is in dictionary else false.
  */
@@ -54,18 +58,22 @@ bool load(const char* dictionary)
         return false;
     }
     
-    while(true)
+    root = malloc(sizeof(node));
+    
+    // get each word and save it
+    char dWord [45];
+    
+    // set dictionary current size to 0
+    dSize = 0;
+    
+    // untill EOF reached perform loading
+    while (fscanf(dfp,"%s\n", dWord) != EOF)
     {
-        // get each word and save it
-        char dWord [45];
-        
-        // untill EOF reached perform loading
-        while (fscanf(dfp,"%s\n", dWord) != EOF)
-        {
-            
-            return true;
-        }
+        loader(dWord);
+        dSize++;
     }
+    fclose(dfp);
+    return true;
 }
 
 /**
@@ -73,8 +81,7 @@ bool load(const char* dictionary)
  */
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return dSize;
 }
 
 /**
@@ -84,4 +91,41 @@ bool unload(void)
 {
     // TODO
     return false;
+}
+
+// loads a word given to it
+void loader(char* dWord)
+{
+    // defined a crawler with initially pointing to root
+    node* crawler = root;
+    
+    // used to access diff chars of the word
+    int i = 0;
+    
+    // loop till end of string is reached
+    while (dWord[i] != '\0')
+    {
+        // defining and setting key to access children nodes.
+        int key = dWord[i] - 'a';
+        if (dWord[i] == '\'')
+        {
+            key = 26;
+        }
+        
+        // condition to malloc new storage if not a perticular childern exists for a node
+        if (crawler -> children[key] == NULL)
+        {
+            crawler -> children[key] = malloc(sizeof(node));
+            crawler = crawler -> children[key];
+        }
+        else
+        {
+            crawler = crawler -> children[key];
+        }
+        
+        i++;
+    }
+    
+    // end of word reached, thus setting bool isWord to true.
+    crawler -> isWord = true;
 }

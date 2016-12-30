@@ -36,4 +36,7 @@ unsigned int size(void);
  */
 bool unload(void);
 
+// for loading words in the trie.
+void loader(char* dWord);
+
 #endif // DICTIONARY_H
