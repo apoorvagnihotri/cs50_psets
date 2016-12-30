@@ -22,14 +22,6 @@
 // prototype
 double calculate(const struct rusage* b, const struct rusage* a);
 
-
-//Trie structure
-typedef struct node
-{
-    bool isWord;
-    struct node* children [27];
-} node;
-
 //main function speller
 int main(int argc, char* argv[])
 {

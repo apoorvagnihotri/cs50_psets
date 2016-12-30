@@ -15,8 +15,12 @@
 
 #include "dictionary.h"
 
-// built functio to load words in dictionary
-void loader(char* c, *node);
+//Trie structure
+typedef struct node
+{
+    bool isWord;
+    struct node* children [27];
+} node;
 
 /**
  * Returns true if word is in dictionary else false.
@@ -56,9 +60,9 @@ bool load(const char* dictionary)
         char dWord [45];
         
         // untill EOF reached perform loading
-        while (fscanf(dfp, dWord) != EOF)
+        while (fscanf(dfp,"%s\n", dWord) != EOF)
         {
-            loader(dWord, &node);
+            
             return true;
         }
     }
