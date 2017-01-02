@@ -168,18 +168,17 @@ void loader(char* dWord)
 
 void unloader(node* child)
 {
-    bool empty = false;
     for (int i = 0; i < 27; i++)
     {
         if (child -> children[i] != NULL)
         {
-            child = child -> children[i];
-            unloader(child);
+            unloader(child -> children[i]);
         }
     }
-    empty = true;
-    if (empty && child != root)
+    if (child != root)
     {
         free(child);
+        return;
     }
+    free (root);
 }
