@@ -178,7 +178,7 @@ void unloader(node* child)
         }
     }
     empty = true;
-    if (child != root)
+    if (empty && child != root)
     {
         free(child);
     }
