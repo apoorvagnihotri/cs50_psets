@@ -14,7 +14,9 @@
 5.  It reads each and every character and can find out easily and efficiently if a word is a word or number or puntuation. It also helps in
     saving resources as we need to save less chars untill we find if the word is a word or some random cnon alphabetical characters.
 6.  We have passed const parameters to check and laod for helping us program them correctly, throwing us errors if we try to modify the parameters passed in.
-7.  TODO
-8.  TODO
-9.  TODO
-10. TODO
+7.  I used trie data structure to implement my spell checker. I used trie because searching time in a trie is almoat constant. my trie data structure contained
+    a boolean value specifing if the location specified a word or not in dictionary. It also had an array of 27 chars, 26 alphabets and 1 for apostrofe.
+8.  It was about 3.8 times slower then the staff's own implementation of speller.c.
+9.  I did not made any changes to my code for improve in performance, beacause i could not think of what will help my code to run faster.
+10. Yup, I have conditions based on uninitiallized pointers, as pointed out by valgrind, but I am not able to chip away those conditions, without
+    having to depend on uninitialled pointers to be equal to NULL.
