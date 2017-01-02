@@ -16,6 +16,13 @@
 // (e.g., pneumonoultramicroscopicsilicovolcanoconiosis)
 #define LENGTH 45
 
+// declaring trie structure
+typedef struct node
+{
+    bool isWord;
+    struct node* children [27];
+} node;
+
 /**
  * Returns true if word is in dictionary else false.
  */
@@ -36,7 +43,10 @@ unsigned int size(void);
  */
 bool unload(void);
 
-// for loading words in the trie.
+// helper funtion for loading words in the trie.
 void loader(char* dWord);
+
+// helperfuntion to unload trie
+void unloader(node* child);
 
 #endif // DICTIONARY_H

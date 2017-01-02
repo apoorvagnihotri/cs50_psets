@@ -15,12 +15,12 @@
 
 #include "dictionary.h"
 
-//Trie structure
-typedef struct node
-{
-    bool isWord;
-    struct node* children [27];
-} node;
+// Trie structure
+// typedef struct node
+// {
+//     bool isWord;
+//     struct node* children [27];
+// } node;
 
 // declaring varibales and structs
 node* root;
@@ -31,18 +31,48 @@ int dSize;
  */
 bool check(const char* word)
 {
+    // coping the word to be checked
     char* currWord = malloc(sizeof(word));
-    strncpy(currWord, word);
-    for (int i = 0, n = strlen(currWord); i < n; i++)
+    int wordLen = strlen(word);
+    strncpy(currWord, word, wordLen);
+    currWord[wordLen + 1] = '\0';
+    
+    // defined a builder pointer with initially pointing to root
+    node* crawler = root;
+    
+    //getting to the correct location in trie, if error occurs, returns false
+    for (int i = 0; i < wordLen; i++)
     {
-        *(currWord + i) = tolower(*(currWord + i));
+        // making speller case-insensitive
+        currWord[i] = tolower(currWord[i]);
+        
+        // defining and setting key to access children nodes.
+        int key = currWord[i] - 'a';
+        if (currWord[i] == '\'')
+        {
+            key = 26;
+        }
+        
+        crawler = crawler -> children[key];
+        
+        if (crawler == NULL)
+        {
+            free(currWord);
+            return false;
+        }
         
     }
     
+    // seeing if bool value for that word is true or not
+    if (crawler -> isWord != true)
+    {
+        free(currWord);
+        return false;
+    }
     
-    
+    // freeing up allocated memory
     free(currWord);
-    return false;
+    return true;
 }
 
 /**
@@ -60,10 +90,12 @@ bool load(const char* dictionary)
         return false;
     }
     
+    //allocating size to store root
     root = malloc(sizeof(node));
+    root -> isWord = false;
     
     // get each word and save it
-    char dWord [45];
+    char dWord [LENGTH + 1];
     
     // set dictionary current size to 0
     dSize = 0;
@@ -91,15 +123,15 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    // TODO
-    return false;
+    unloader(root);
+    return true;
 }
 
 // loads a word given to it
 void loader(char* dWord)
 {
-    // defined a crawler with initially pointing to root
-    node* crawler = root;
+    // defined a builder pointer with initially pointing to root
+    node* builder = root;
     
     // used to access diff chars of the word
     int i = 0;
@@ -115,19 +147,33 @@ void loader(char* dWord)
         }
         
         // condition to malloc new storage if not a perticular childern exists for a node
-        if (crawler -> children[key] == NULL)
+        if (builder -> children[key] == NULL)
         {
-            crawler -> children[key] = malloc(sizeof(node));
-            crawler = crawler -> children[key];
+            builder -> children[key] = malloc(sizeof(node));
+            builder = builder -> children[key];
+            builder -> isWord = false;
         }
         else
         {
-            crawler = crawler -> children[key];
+            builder = builder -> children[key];
         }
         
         i++;
     }
     
     // end of word reached, thus setting bool isWord to true.
-    crawler -> isWord = true;
+    builder -> isWord = true;
+}
+
+void unloader(node* child)
+{
+    for (int i = 0; i < 27; i++)
+    {
+        if (child -> children[i] != NULL)
+        {
+            child = child -> children[i];
+            unloader(child);
+        }
+    }
+    free(child);
 }
