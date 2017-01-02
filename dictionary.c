@@ -32,10 +32,10 @@ int dSize;
 bool check(const char* word)
 {
     // coping the word to be checked
-    char* currWord = malloc(sizeof(word));
+    char* currWord = malloc(LENGTH + 1);
     int wordLen = strlen(word);
     strncpy(currWord, word, wordLen);
-    currWord[wordLen + 1] = '\0';
+    currWord[wordLen] = '\0';
     
     // defined a builder pointer with initially pointing to root
     node* crawler = root;
@@ -147,7 +147,7 @@ void loader(char* dWord)
             key = 26;
         }
         
-        // condition to malloc new storage if not a perticular childern exists for a node
+        // condition to malloc new storage if a perticular childern does not exist for a node
         if (builder -> children[key] == NULL)
         {
             builder -> children[key] = malloc(sizeof(node));
