@@ -123,7 +123,8 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    unloader(root);
+    node* child = root;
+    unloader(child);
     return true;
 }
 
@@ -167,6 +168,7 @@ void loader(char* dWord)
 
 void unloader(node* child)
 {
+    bool empty = false;
     for (int i = 0; i < 27; i++)
     {
         if (child -> children[i] != NULL)
@@ -175,5 +177,9 @@ void unloader(node* child)
             unloader(child);
         }
     }
-    free(child);
+    empty = true;
+    if (child != root)
+    {
+        free(child);
+    }
 }
