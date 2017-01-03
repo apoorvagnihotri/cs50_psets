@@ -154,6 +154,8 @@ void loader(char* dWord)
             builder = builder -> children[key];
             builder -> isWord = false;
         }
+        
+        // if the children exist, follow into the the node
         else
         {
             builder = builder -> children[key];
@@ -162,23 +164,30 @@ void loader(char* dWord)
         i++;
     }
     
-    // end of word reached, thus setting bool isWord to true.
+    // end of word reached, thus setting bool isWord to true
     builder -> isWord = true;
 }
 
+// helper function to unload trie
 void unloader(node* child)
 {
+    // loop over all the child in the array
     for (int i = 0; i < 27; i++)
     {
         if (child -> children[i] != NULL)
         {
+            // pass in the new pointer to unloader
             unloader(child -> children[i]);
         }
     }
+    
+    // if pointer passed in the unloader funtion is not root dn free the pointer
     if (child != root)
     {
         free(child);
         return;
     }
+    
+    // free root
     free (root);
 }
