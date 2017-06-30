@@ -1,27 +1,57 @@
 #!/usr/bin/env php
 <?php
 
+    // requirement 
+    require(__DIR__ . "/../includes/config.php");
+    
+    
     //Check if the user gave correct number of arguments
     if ($argc != 2)
     {
-        print ("Correct usage:\n./import *.txt");
+        print ("Correct usage:\n./import *.txt\n");
         exit(1);
     }
     
+    
     //Checking if the file exists.
-    $ZipFile = $argv[1];
-    if (!(file_exists($ZipFile)))
+    $zip_file = $argv[1];
+    if (!(file_exists($zip_file)))
     {
         print("File doesn't exists.\n");
         exit(2);
     }
     
+    
     //Checking if file is readable.
-    if (!(is_readable($ZipFile)))
-    $ZipContent = fopen($ImportedZips);
+    if (!(is_readable($zip_file)))
+    {
+        print("Permission to read the file denied.\n");
+        exit(2);
+    }
     
     
     // Opening file containing the data.
+    $file_ptr = fopen($zip_file, "r");
     
-
+    // check if open was successful
+    if ($file_ptr == false)
+    {
+    	print("Could not open file.\n");
+    	exit(2);
+    }
+    
+    // Reading the file with fgetcsv()
+    while (!(feof($file_ptr))) // reading till the end of file. 
+    {
+        $zip_row = fgetcsv($file_ptr, 1000, "\t"); //Each row is saved in zip_row
+        
+        //Storing the data on the mysql database.
+        
+    }
+    
+    
+    //closing the file.
+    fclose($file_ptr);
+    print("Done adding the contents of file - " . $zip_file . "\n");
+    exit(0);
 ?>
