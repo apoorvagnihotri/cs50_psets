@@ -19,7 +19,7 @@ var markers = [];
 var info = new google.maps.InfoWindow();
 
 // execute when the DOM is fully loaded
-$(function() {
+$(document).ready(function() {
 
     // styles for map
     // https://developers.google.com/maps/documentation/javascript/styling

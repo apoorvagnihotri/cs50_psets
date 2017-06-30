@@ -1,6 +1,27 @@
 #!/usr/bin/env php
 <?php
 
-    // TODO
+    //Check if the user gave correct number of arguments
+    if ($argc != 2)
+    {
+        print ("Correct usage:\n./import *.txt");
+        exit(1);
+    }
+    
+    //Checking if the file exists.
+    $ZipFile = $argv[1];
+    if (!(file_exists($ZipFile)))
+    {
+        print("File doesn't exists.\n");
+        exit(2);
+    }
+    
+    //Checking if file is readable.
+    if (!(is_readable($ZipFile)))
+    $ZipContent = fopen($ImportedZips);
+    
+    
+    // Opening file containing the data.
+    
 
 ?>
