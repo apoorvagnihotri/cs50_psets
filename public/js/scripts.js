@@ -79,7 +79,7 @@ function addMarker(place)
         return;
     }
     
-    var ico = "../img/icon.ico";
+    var ico = "../img/icon.png";
     var latlng = new google.maps.LatLng(place["latitude"], place["longitude"]);
     var lableC = place["place_name"] + ", " + place["admin_name1"];
     var marker = new MarkerWithLabel(
@@ -94,15 +94,7 @@ function addMarker(place)
         });
     markers.push(marker);
     
-    info(
-    {
-        content: "<div id='articles'><img id='loader' src='img/ajax-loader.gif'/></div>"
-    });
-    google.maps.event.addListener(marker, "click", function (e) 
-    {
-        iw.open(map, this); 
-    });
-
+}
 
 /**
  * Configures application.
