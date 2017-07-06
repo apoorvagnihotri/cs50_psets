@@ -78,20 +78,31 @@ function addMarker(place)
     {
         return;
     }
-    var latlng = new google.maps.LatLng(place["latitude"], place["logitude"]);
     
+    var ico = "../img/icon.ico";
+    var latlng = new google.maps.LatLng(place["latitude"], place["longitude"]);
+    var lableC = place["place_name"] + ", " + place["admin_name1"];
     var marker = new MarkerWithLabel(
         {
             position: latlng,
             map: map,
             draggable: false,
-            icon: "../img/icon.ico",
-            labelContent: (place["place_name"] + ", " + place["admin_name1"]),
+            icon: ico,
+            labelContent: lableC,
             labelClass: "labels", // the CSS class for the label [Thanks]
+            labelAnchor: new google.maps.Point(65, 0) // apperantly for aligning the lables.
         });
     markers.push(marker);
     
-}
+    info(
+    {
+        content: "<div id='articles'><img id='loader' src='img/ajax-loader.gif'/></div>"
+    });
+    google.maps.event.addListener(marker, "click", function (e) 
+    {
+        iw.open(map, this); 
+    });
+
 
 /**
  * Configures application.
