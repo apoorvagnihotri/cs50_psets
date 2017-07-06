@@ -48,7 +48,7 @@ $(document).ready(function() {
     // options for map
     // https://developers.google.com/maps/documentation/javascript/reference#MapOptions
     var options = {
-        center: {lat: 37.4236, lng: -122.1619}, // Stanford, California
+        center: {lat: 23.166036, lng: 79.911373}, // Jabalpur, Madhya Pradesh, India
         disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         maxZoom: 14,
@@ -74,7 +74,23 @@ $(document).ready(function() {
  */
 function addMarker(place)
 {
-    // TODO
+    if (markers.length > 10)
+    {
+        return;
+    }
+    var latlng = new google.maps.LatLng(place["latitude"], place["logitude"]);
+    
+    var marker = new MarkerWithLabel(
+        {
+            position: latlng,
+            map: map,
+            draggable: false,
+            icon: "../img/icon.ico",
+            labelContent: (place["place_name"] + ", " + place["admin_name1"]),
+            labelClass: "labels", // the CSS class for the label [Thanks]
+        });
+    markers.push(marker);
+    
 }
 
 /**
@@ -108,7 +124,7 @@ function configure()
         source: search,
         templates: {
             empty: "no places found yet",
-            suggestion: _.template("<p><%- place_name %>, <%- admin_name1 %></p>")
+            suggestion: _.template("<p><%- place_name %>, <%- admin_name1 %>, <%- postal_code %></p>")
         }
     });
 
