@@ -16,7 +16,9 @@ var map;
 var markers = [];
 
 // info window
-var info = new google.maps.InfoWindow();
+var info = new google.maps.InfoWindow({
+    content: "<div id ='articles'><ul>"
+});
 
 // execute when the DOM is fully loaded
 $(document).ready(function() {
@@ -94,6 +96,12 @@ function addMarker(place)
         });
     markers.push(marker);
     
+    var articles = "<ul>"
+    
+    marker.addListener('click', function() 
+    {
+    infowindow.open(map, marker);
+    });
 }
 
 /**
