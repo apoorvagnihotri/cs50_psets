@@ -17,7 +17,7 @@ var markers = [];
 
 // info window
 var info = new google.maps.InfoWindow({
-    content: "<div id ='articles'><ul>"
+    content: ''
 });
 
 // execute when the DOM is fully loaded
@@ -96,12 +96,24 @@ function addMarker(place)
         });
     markers.push(marker);
     
-    var articles = "<ul>"
+    var parameters = {
+        geo: place["postal_code"]
+    };
     
-    marker.addListener('click', function() 
+    var content = ["<div id = 'articles'><ul>"];
+    
+    $.getJSON("articals.php", parameters, function( data )
     {
-    infowindow.open(map, marker);
+        $.each( data, function( key, val ) {
+        items.push( "<li id='" + key + "'>" + val + "</li>" );
+        });
+        
+        $( "<ul/>", {
+        "class": "my-new-list",
+        html: items.join( "" )
+        }).appendTo( "body" );
     });
+    var content = "";
 }
 
 /**
