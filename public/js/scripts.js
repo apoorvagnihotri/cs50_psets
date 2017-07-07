@@ -50,7 +50,7 @@ $(document).ready(function() {
     // options for map
     // https://developers.google.com/maps/documentation/javascript/reference#MapOptions
     var options = {
-        center: {lat: 23.166036, lng: 79.911373}, // Jabalpur, Madhya Pradesh, India
+        center: {lat: 42.376306, lng: -71.118167}, // Harvard
         disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         maxZoom: 14,
@@ -102,7 +102,7 @@ function addMarker(place)
     
     var content = ["<div id = 'articles'><ul>"];
     
-    $.getJSON("articals.php", parameters, function( json )
+    $.getJSON("articles.php", parameters, function( json )
     {
         $.each( json, function( item ) 
         {
@@ -112,8 +112,10 @@ function addMarker(place)
         content.push("<ul/>");
         content.join("");
     });
-    
-    info.content = content;
+    google.maps.event.addListener("click", marker, function()
+    {
+        showInfo(marker, content);
+    });
 }
 
 /**
