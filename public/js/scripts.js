@@ -102,18 +102,18 @@ function addMarker(place)
     
     var content = ["<div id = 'articles'><ul>"];
     
-    $.getJSON("articals.php", parameters, function( data )
+    $.getJSON("articals.php", parameters, function( json )
     {
-        $.each( data, function( key, val ) {
-        items.push( "<li id='" + key + "'>" + val + "</li>" );
+        $.each( json, function( item ) 
+        {
+            content.push( "<li><a href='" + item[link] + "'>" + item[title] + "</a></li>" );
         });
-        
-        $( "<ul/>", {
-        "class": "my-new-list",
-        html: items.join( "" )
-        }).appendTo( "body" );
+
+        content.push("<ul/>");
+        content.join("");
     });
-    var content = "";
+    
+    info.content = content;
 }
 
 /**
