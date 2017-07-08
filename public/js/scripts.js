@@ -76,13 +76,16 @@ $(document).ready(function() {
  */
 function addMarker(place)
 {
+    // checking if there are already more than 10 markers
     if (markers.length > 10)
     {
         return;
     }
     
-    var ico = "../img/icon.png";
-    var latlng = new google.maps.LatLng(place["latitude"], place["longitude"]);
+    var ico = "../img/icon.png"; // icon for the marker
+    var latlng = new google.maps.LatLng(place["latitude"], place["longitude"]); /** getting lat long from the "object" passed to addMarker(place) 
+                                                                                 *  and saving an isntant of google latlong method.
+                                                                                 */
     var lableC = place["place_name"] + ", " + place["admin_name1"];
     var marker = new MarkerWithLabel(
         {
@@ -94,20 +97,29 @@ function addMarker(place)
             labelClass: "labels", // the CSS class for the label [Thanks]
             labelAnchor: new google.maps.Point(65, 0) // apperantly for aligning the lables.
         });
-    markers.push(marker);
+    markers.push(marker); // pushing marker to markers for counting and removing functions.
     
+    // making an object to articles.php for future passing
     var parameters = {
         geo: place["postal_code"]
     };
     
+    // setting infoBox content
     var content = "<div id = articles><img src = '../img/ajax-loader.gif'/></div>"
+    
+    // setting content and showing infoBox upon the event of clicking
     google.maps.event.addListener(marker, "click", function()
     {
+        // show the ajax_loder.gif
         showInfo(marker, content);
+        
+        // setting up the content div
         content = ["<div id = 'articles'><ul>"];
     
+        // returning some sort of object by reading a json file
         $.getJSON("articles.php", parameters).done(function( json )
         {
+            // checking if articles.php returned any news
     	    if (json.length === 0)
     	    {
     		    showInfo(marker, "No News.");
@@ -116,7 +128,7 @@ function addMarker(place)
     	    {
         		content = "";	
         
-        		// create template
+        		// create template and using underscore.js to print html easily using json data sources.
         		var template = _.template("<li><a href = '<%- link %>' target = '_blank'><%- title %></a></li>");
         		
         		// use template to insert content
@@ -128,6 +140,8 @@ function addMarker(place)
             			title: json[i].title
         		    }); 
     		    }
+    		    
+    		    // show the news returned from articles.php
     		    showInfo(marker, content);
     	    }
         });
