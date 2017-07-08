@@ -100,21 +100,37 @@ function addMarker(place)
         geo: place["postal_code"]
     };
     
-    var content = ["<div id = 'articles'><ul>"];
-    
-    $.getJSON("articles.php", parameters, function( json )
-    {
-        $.each( json, function( item ) 
-        {
-            content.push( "<li><a href='" + item[link] + "'>" + item[title] + "</a></li>" );
-        });
-
-        content.push("<ul/>");
-        content.join("");
-    });
-    google.maps.event.addListener("click", marker, function()
+    var content = "<div id = articles><img src = '../img/ajax-loader.gif'/></div>"
+    google.maps.event.addListener(marker, "click", function()
     {
         showInfo(marker, content);
+        content = ["<div id = 'articles'><ul>"];
+    
+        $.getJSON("articles.php", parameters).done(function( json )
+        {
+    	    if (json.length === 0)
+    	    {
+    		    showInfo(marker, "No News.");
+    	    }
+    	    else
+    	    {
+        		content = "";	
+        
+        		// create template
+        		var template = _.template("<li><a href = '<%- link %>' target = '_blank'><%- title %></a></li>");
+        		
+        		// use template to insert content
+        		for (var i = 0, n = json.length; i < n; i++)
+        		{
+        		    content += template(
+        		    {
+            			link: json[i].link,
+            			title: json[i].title
+        		    }); 
+    		    }
+    		    showInfo(marker, content);
+    	    }
+        });
     });
 }
 
