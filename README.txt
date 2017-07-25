@@ -1,16 +1,21 @@
 Mashup
 
 instructions for running -
-1. start the apache server using the command provided below
+
+1. stop any running servers or mysql database by typing the following command in the terminal window.
+apache50 stop
+mysql50 stop
+
+2. start the apache server using the command provided below
 apache50 start ~/workspace/level2phase3/pset8/public
 
-2. start mysql by typing the following comming in the terminal
+3. start mysql by typing the following command in the terminal
 mysql50 start
 
-3. Now open the website by going to the left hand top corner and opening a dropdown menu by clicking "CS50 IDE"
+4. Now open the website by going to the left hand top corner and opening a dropdown menu by clicking "CS50 IDE"
 and then clicking "Web Server".
 
-4. A new tab will open and it will contain the website brought together made by me.
+5. A new tab will open and it will contain the website brought together made by me.
 
 
 
