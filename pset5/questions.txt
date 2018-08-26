@@ -1,0 +1,22 @@
+0.  An atrificial long word to signify a disease of lung.
+1.  getrusage returns resource usage measures.
+2.  Struct rusage has 16 members.
+3.  Before and after are passed by reference to save time because we would otherwise would have to copy those 2 structs, wasting resources in the process.
+4.  The main function's for loop loops over the file, getting every character till the condition for EOF is reached.
+    Every time we are in a loop it check is the character it just read is an alphabet, or it checks if it is an apostrofe succeeding a char. 
+    Then this char or apostrofe appended to the word and int index is increased. INT index signifies growing size of the word. 
+    There is a condition in place to check if the index does not cross the maximum length of a word possible. If the word in question crosses this threshold,
+    the program skips over all the chars untill a alphabet is reched.
+    We check if the apostrofe is preceded by char by an int; index. Further if the char is not a and is a integer, 
+    the program skips the remaining chars of this word untill a char is reached that is not alphanumeric and it is further not EOF.
+    Now when we have index > 0 any char that comes which is not alphabetic or apostrofe should imply end of that perticual word, 
+    thus resetting the index to 0.
+5.  It reads each and every character and can find out easily and efficiently if a word is a word or number or puntuation. It also helps in
+    saving resources as we need to save less chars untill we find if the word is a word or some random cnon alphabetical characters.
+6.  We have passed const parameters to check and laod for helping us program them correctly, throwing us errors if we try to modify the parameters passed in.
+7.  I used trie data structure to implement my spell checker. I used trie because searching time in a trie is almoat constant. my trie data structure contained
+    a boolean value specifing if the location specified a word or not in dictionary. It also had an array of 27 chars, 26 alphabets and 1 for apostrofe.
+8.  It was about 3.8 times slower then the staff's own implementation of speller.c.
+9.  I did not made any changes to my code for improve in performance, beacause i could not think of what will help my code to run faster.
+10. Yup, I have conditions based on uninitiallized pointers, as pointed out by valgrind, but I am not able to chip away those conditions, without
+    having to depend on uninitialled pointers to be equal to NULL.
